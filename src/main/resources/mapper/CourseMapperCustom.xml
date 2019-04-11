@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.system.dao.CourseMapperCustom">
+    
+    <resultMap id="CourseCustomMap" type="CourseCustom">
+        <id property="courseid" column="courseidID"/>
+        <result property="coursename" column="courseName"/>
+        <result property="teacherid" column="teacherID"/>
+        <result property="coursetime" column="courseTime"/>
+        <result property="classroom" column="classRoom"/>
+        <result property="courseweek" column="courseWeek"/>
+        <result property="coursetype" column="courseType"/>
+        <result property="collegeid" column="collegeID"/>
+        <result property="collegeName" column="collegeName"/>
+    </resultMap>
+
+    <select id="findByPaging" parameterType="PagingVO" resultMap="CourseCustomMap">
+        select course.*, college.collegeName
+        from course, college
+        WHERE course.collegeID = college.collegeID
+        limit #{toPageNo}, #{pageSize}
+    </select>
+
+</mapper>
